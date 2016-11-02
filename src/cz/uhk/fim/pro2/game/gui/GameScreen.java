@@ -1,5 +1,7 @@
 package cz.uhk.fim.pro2.game.gui;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -19,6 +21,11 @@ public class GameScreen extends Screen {
 				mainFrame.setScreen(new HomeScreen(mainFrame));
 			}
 		});
+
+		jButtonBack.setBounds(20, 20, 60, 60);
+		jButtonBack.setFont(new Font("Arial", Font.PLAIN, 8));
+		jButtonBack.setForeground(Color.RED);
+		//jButtonPause.setBounds(20, 20, 60, 60);
 		
 		add(jButtonBack);
 		add(jButtonPause);

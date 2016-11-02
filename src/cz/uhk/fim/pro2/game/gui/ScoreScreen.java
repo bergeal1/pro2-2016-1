@@ -18,6 +18,8 @@ public class ScoreScreen extends Screen {
 				mainFrame.setScreen(new HomeScreen(mainFrame));
 			}
 		});
+
+		jButtonBack.setBounds(20, 20, 60, 60);
 		
 		add(jButtonBack);
 	}
