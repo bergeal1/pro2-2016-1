@@ -23,4 +23,18 @@ public class World {
 		hearts.add(heart);
 	}
 	
+	public Bird getBird() {
+		return bird;
+	}
+
+	@Override
+	public String toString() {
+		return "Bird: " + bird.getName() 
+		+ " [" + bird.getPositionX() 
+		+ ";" + bird.getPositionY() + "]\n"
+				
+		+ "Tubes: " + tubes.size() + "\n"				
+		+ "Hearts: " + hearts.size();
+	}
+	
 }

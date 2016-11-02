@@ -7,6 +7,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
+import cz.uhk.fim.pro2.game.model.Bird;
+import cz.uhk.fim.pro2.game.model.Heart;
+import cz.uhk.fim.pro2.game.model.Tube;
+import cz.uhk.fim.pro2.game.model.World;
+
 public class GameScreen extends Screen {
 
 	public GameScreen(MainFrame mainFrame) {
@@ -23,12 +28,27 @@ public class GameScreen extends Screen {
 		});
 
 		jButtonBack.setBounds(20, 20, 60, 60);
-		jButtonBack.setFont(new Font("Arial", Font.PLAIN, 8));
-		jButtonBack.setForeground(Color.RED);
-		//jButtonPause.setBounds(20, 20, 60, 60);
+		jButtonPause.setBounds(400, 20, 60, 60);
 		
 		add(jButtonBack);
 		add(jButtonPause);
+		
+		
+		// WORLD 
+		Bird bird = new Bird("Ales", 240, 400);
+		World world = new World(bird);
+		world.addTube(new Tube(400, 400, Color.GREEN));
+		world.addTube(new Tube(600, 300, Color.GREEN));
+		world.addTube(new Tube(800, 500, Color.GREEN));
+
+		world.addHeart(new Heart(500, 450));
+		world.addHeart(new Heart(700, 600));
+		
+		GameCanvas gameCanvas = new GameCanvas(world);
+		gameCanvas.setBounds(0, 0, MainFrame.WIDTH, MainFrame.HEIGHT);
+		add(gameCanvas);
+		
+		
 	}
 
 }
