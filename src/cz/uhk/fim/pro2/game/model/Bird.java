@@ -2,11 +2,15 @@ package cz.uhk.fim.pro2.game.model;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import cz.uhk.fim.pro2.game.gui.MainFrame;
 
 public class Bird {
-	
+
+	public static final int JUMP = 1000;
+	public static final int GRAVITY = 500;
+
 	private String name;
 	private float positionX, positionY;
 	private float speed;
@@ -58,8 +62,18 @@ public class Bird {
 	}
 
 	public void paint(Graphics g) {
+		Rectangle rectangle = getRectangle();
+
 		g.setColor(Color.blue);
-		g.fillRect(
+		g.fillRect(rectangle.x, rectangle.y, rectangle.width, rectangle.height);
+	}
+
+	public void goUp() {
+		speed = JUMP;
+	}
+
+	public Rectangle getRectangle() {
+		return new Rectangle(
 						(int) (getPositionX() - 25),
 						(int) (MainFrame.HEIGHT - getPositionY() - 25),
 						50,
@@ -67,27 +81,36 @@ public class Bird {
 		);
 	}
 
-	public void goUp() {
-		
-	}
-	
-	public void catchHeart() {
-		
-	}
-	
-	public void die() {
-		
+	public boolean collidesWith(Tube tube) {
+		Rectangle rectangle = getRectangle();
+
+		return rectangle.intersects(tube.getTopRectangle()) || rectangle.intersects(tube.getBottomRectangle());
 	}
 
-	public void addLive() {
-		
+	public boolean collidesWith(Heart heart) {
+		Rectangle rectangle = getRectangle();
+
+		return rectangle.intersects(heart.getRectangle());
 	}
-	
-	public void removeLive() {
-		
+
+	public boolean isOutOf() {
+		Rectangle rectangle = getRectangle();
+
+		if (rectangle.getMinX() < 0 || rectangle.getMinY() < 0) {
+			return true;
+		}
+
+		if (rectangle.getMaxX() > MainFrame.WIDTH || rectangle.getMaxY() > MainFrame.HEIGHT) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public void update(float deltaTime) {
-		positionX += World.SPEED * deltaTime;
+		positionY += speed * deltaTime;
+		positionY -= GRAVITY * deltaTime;
+
+		speed -= speed * deltaTime;
 	}
 }
