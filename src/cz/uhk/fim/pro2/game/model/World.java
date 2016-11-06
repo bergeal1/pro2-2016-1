@@ -5,6 +5,8 @@ import java.util.List;
 
 public class World {
 
+	public static final int SPEED = 100;
+
 	private Bird bird;	
 	private List<Tube> tubes;	
 	private List<Heart> hearts;
@@ -13,6 +15,18 @@ public class World {
 		this.bird = bird;
 		tubes = new ArrayList<>();
 		hearts = new ArrayList<>();
+	}
+
+	public void update(float deltaTime) {
+		bird.update(deltaTime);
+
+		for (Tube tube : tubes) {
+			tube.update(deltaTime);
+		}
+
+		for (Heart heart : hearts) {
+			heart.update(deltaTime);
+		}
 	}
 	
 	public void addTube(Tube tube) {
@@ -25,6 +39,14 @@ public class World {
 	
 	public Bird getBird() {
 		return bird;
+	}
+
+	public List<Tube> getTubes() {
+		return tubes;
+	}
+
+	public List<Heart> getHearts() {
+		return hearts;
 	}
 
 	@Override

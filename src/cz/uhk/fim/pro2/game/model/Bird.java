@@ -1,5 +1,10 @@
 package cz.uhk.fim.pro2.game.model;
 
+import java.awt.Color;
+import java.awt.Graphics;
+
+import cz.uhk.fim.pro2.game.gui.MainFrame;
+
 public class Bird {
 	
 	private String name;
@@ -52,6 +57,16 @@ public class Bird {
 		this.lives = lives;
 	}
 
+	public void paint(Graphics g) {
+		g.setColor(Color.blue);
+		g.fillRect(
+						(int) (getPositionX() - 25),
+						(int) (MainFrame.HEIGHT - getPositionY() - 25),
+						50,
+						50
+		);
+	}
+
 	public void goUp() {
 		
 	}
@@ -70,5 +85,9 @@ public class Bird {
 	
 	public void removeLive() {
 		
-	}	
+	}
+
+	public void update(float deltaTime) {
+		positionX += World.SPEED * deltaTime;
+	}
 }

@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 import cz.uhk.fim.pro2.game.model.Bird;
+import cz.uhk.fim.pro2.game.model.Heart;
+import cz.uhk.fim.pro2.game.model.Tube;
 import cz.uhk.fim.pro2.game.model.World;
 
 public class GameCanvas extends Canvas {
@@ -20,14 +22,15 @@ public class GameCanvas extends Canvas {
 		super.paint(g);
 
 		Bird bird = world.getBird();
-		
-		g.setColor(Color.red);
-		g.fillRect(
-				(int) bird.getPositionX() - 25, 
-				(int) bird.getPositionY() - 25, 
-				50, 
-				50
-		);		
+		bird.paint(g);
+
+		for (Tube tube : world.getTubes()) {
+			tube.paint(g);
+		}
+
+		for (Heart heart : world.getHearts()) {
+			heart.paint(g);
+		}
 	}
 
 }
