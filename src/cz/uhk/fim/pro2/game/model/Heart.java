@@ -3,6 +3,7 @@ package cz.uhk.fim.pro2.game.model;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.util.Random;
 
 import cz.uhk.fim.pro2.game.gui.MainFrame;
 import sun.applet.Main;
@@ -52,5 +53,9 @@ public class Heart {
 						50,
 						50
 		);
+	}
+
+	public static int getRandomY() {
+		return new Random().nextInt(600) + 100;
 	}
 }

@@ -8,6 +8,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.Timer;
 
 import cz.uhk.fim.pro2.game.listener.WorldListener;
@@ -25,6 +26,8 @@ public class GameScreen extends Screen implements WorldListener {
 	private Timer timer;
 
 	private long lastTimeMillis;
+
+	private JLabel jLabelScore, jLabelLives;
 
 	public GameScreen(MainFrame mainFrame) {
 		super(mainFrame);
@@ -56,18 +59,29 @@ public class GameScreen extends Screen implements WorldListener {
 		
 		add(jButtonBack);
 		add(jButtonPause);
-		
-		
+
+		jLabelScore = new JLabel("Score: " + Bird.DEFAULT_SCORE);
+		jLabelLives = new JLabel("Lives: " + Bird.DEFAULT_LIVES);
+
+		jLabelScore.setBounds(100, 20, 120, 60);
+		jLabelLives.setBounds(260, 20, 120, 60);
+
+		add(jLabelScore);
+		add(jLabelLives);
+
 		// WORLD 
 		bird = new Bird("Ales", 240, 400);
 		world = new World(bird, this);
+		world.generateRandom();
+/*
 		world.addTube(new Tube(400, 400, Color.GREEN));
 		world.addTube(new Tube(600, 300, Color.GREEN));
 		world.addTube(new Tube(800, 500, Color.GREEN));
 
 		world.addHeart(new Heart(500, 450));
 		world.addHeart(new Heart(700, 600));
-		
+*/
+
 		GameCanvas gameCanvas = new GameCanvas(world);
 		gameCanvas.setBounds(0, 0, MainFrame.WIDTH, MainFrame.HEIGHT);
 		gameCanvas.addMouseListener(new MouseAdapter() {
@@ -90,6 +104,9 @@ public class GameScreen extends Screen implements WorldListener {
 				gameCanvas.repaint();
 
 				lastTimeMillis = currentTimeMillis;
+
+				jLabelScore.setText("Score: " + bird.getScore());
+				jLabelLives.setText("Lives: " + bird.getLives());
 			}
 		});
 		lastTimeMillis = System.currentTimeMillis();
@@ -99,15 +116,33 @@ public class GameScreen extends Screen implements WorldListener {
 	@Override
 	public void catchHeart(Heart heart) {
 		System.out.println("Chytil jsem srdicko");
+
+		heart.setPositionY(-100);
+
+		bird.addLive();
 	}
 
 	@Override
 	public void crashTube(Tube tube) {
 		System.out.println("Narval jsem to do truby");
+
+		bird.setPositionY(tube.getCenterY());
+		bird.setSpeed(Bird.JUMP / 2);
+
+		if (!bird.removeLive()) {
+			timer.stop();
+		}
 	}
 
 	@Override
 	public void outOf() {
 		System.out.println("A ted jsem uplne mimo");
+
+		bird.setPositionY(MainFrame.HEIGHT / 2);
+		bird.setSpeed(Bird.JUMP / 2);
+
+		if (!bird.removeLive()) {
+			timer.stop();
+		}
 	}
 }

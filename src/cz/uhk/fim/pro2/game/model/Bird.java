@@ -11,18 +11,23 @@ public class Bird {
 	public static final int JUMP = 1000;
 	public static final int GRAVITY = 500;
 
+	public static final int DEFAULT_LIVES = 3;
+	public static final int DEFAULT_SCORE = 0;
+
 	private String name;
 	private float positionX, positionY;
 	private float speed;
 	private int lives;
+	private int score;
 	
 	public Bird(String name, float positionX, float positionY) {
 		super();
 		this.name = name;
 		this.positionX = positionX;
 		this.positionY = positionY;
-		speed = 0;
-		lives = 3;
+		speed = JUMP / 2;
+		score = DEFAULT_SCORE;
+		lives = DEFAULT_LIVES;
 	}
 	
 	public String getName(){
@@ -112,5 +117,26 @@ public class Bird {
 		positionY -= GRAVITY * deltaTime;
 
 		speed -= speed * deltaTime;
+	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	public void addScore() {
+		score++;
+	}
+
+	public void addLive() {
+		lives++;
+	}
+
+	public boolean removeLive() {
+		lives--;
+		return lives > 0;
 	}
 }
