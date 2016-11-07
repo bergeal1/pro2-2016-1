@@ -21,6 +21,9 @@ public class GameCanvas extends Canvas {
 	public void paint(Graphics g) {
 		super.paint(g);
 
+		g.setColor(Color.cyan);
+		g.fillRect(0, 0, 480, 800);
+
 		Bird bird = world.getBird();
 		bird.paint(g);
 
@@ -31,6 +34,12 @@ public class GameCanvas extends Canvas {
 		for (Heart heart : world.getHearts()) {
 			heart.paint(g);
 		}
+
+		g.setColor(Color.orange);
+		g.fillRect(0, 0, 480, 50);
+
+		g.setColor(new Color(150, 100, 20));
+		g.fillRect(0, 650, 480, 150);
 	}
 
 }

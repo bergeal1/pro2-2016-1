@@ -101,11 +101,11 @@ public class Bird {
 	public boolean isOutOf() {
 		Rectangle rectangle = getRectangle();
 
-		if (rectangle.getMinX() < 0 || rectangle.getMinY() < 0) {
+		if (rectangle.getMinX() < 0 || rectangle.getMinY() < 50) {
 			return true;
 		}
 
-		if (rectangle.getMaxX() > MainFrame.WIDTH || rectangle.getMaxY() > MainFrame.HEIGHT) {
+		if (rectangle.getMaxX() > MainFrame.WIDTH || rectangle.getMaxY() > 650) {
 			return true;
 		}
 

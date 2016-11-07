@@ -131,6 +131,7 @@ public class GameScreen extends Screen implements WorldListener {
 
 		if (!bird.removeLive()) {
 			timer.stop();
+			mainFrame.setScreen(new FinishScreen(mainFrame, bird));
 		}
 	}
 
@@ -143,6 +144,7 @@ public class GameScreen extends Screen implements WorldListener {
 
 		if (!bird.removeLive()) {
 			timer.stop();
+			mainFrame.setScreen(new FinishScreen(mainFrame, bird));
 		}
 	}
 }
