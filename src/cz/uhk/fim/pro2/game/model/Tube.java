@@ -13,6 +13,9 @@ public class Tube {
 	private Color color;
 	
 	private static final int GAP = 200;
+	private static final int WIDTH = 50;
+	
+	private boolean counted = false;
 	
 	public Tube(float positionX, float height, Color color) {
 		super();
@@ -45,20 +48,32 @@ public class Tube {
 	
 	public Rectangle getTopRectangle(){
 		return new Rectangle(
-				(int) (getPositionX()) - 25,
+				(int) (getPositionX()) - (WIDTH / 2),
 				(int) height, 
-				50,
+				WIDTH,
 				(int) (MainFrame.HEIGHT - height)
 			);
 	}
 	
 	public Rectangle getBottomRectangle(){
 		return new Rectangle(
-				(int)(getPositionX()) - 25,
+				(int)(getPositionX()) - (WIDTH / 2),
 				0, 
-				50,
+				WIDTH,
 				(int) (height - GAP)
 			);
+	}
+	
+	public int getCenterY(){
+		return (int) (height - GAP/2.0);
+	}
+	
+	public int getMinX() {
+		return (int) positionX - (WIDTH / 2);
+	}
+	
+	public int getMaxX() {
+		return (int) positionX + (WIDTH / 2);
 	}
 
 	public float getPositionX() {
@@ -80,8 +95,12 @@ public class Tube {
 	public void update(float deltaTime){
 		positionX -= World.SPEED * deltaTime;
 	}
+
+	public boolean isCounted() {
+		return counted;
+	}
 	
-	
-	// TODO konstruktor, gettery, settery, toString()
-	
+	public void setCounted(boolean counted) {
+		this.counted = counted;
+	}
 }

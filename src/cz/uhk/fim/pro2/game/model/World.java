@@ -42,7 +42,16 @@ public class World {
 			tube.update(deltaTime);
 			
 			if(bird.collideWith(tube)){
+				tube.setCounted(true);
 				worldListener.crashTube(tube);
+			} else {
+				if(!tube.isCounted() && 
+				   bird.getPositionX() > tube.getMinX() && 
+				   bird.getPositionX() < tube.getMaxX())
+				{
+					bird.addPoint();
+					tube.setCounted(true);
+				}
 			}
 		}
 	}
