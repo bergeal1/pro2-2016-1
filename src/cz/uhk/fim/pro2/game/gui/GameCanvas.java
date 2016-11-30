@@ -12,6 +12,9 @@ import cz.uhk.fim.pro2.game.model.World;
 
 public class GameCanvas extends Canvas {
 	
+	public static int UP_BOUND = 100;
+	public static int DOWN_BOUND = 70;
+	
 	private World world;
 	
 	public GameCanvas(World world) {
@@ -22,6 +25,9 @@ public class GameCanvas extends Canvas {
 	public void paint(Graphics g) {
 		super.paint(g);
 
+		g.setColor(Color.cyan);
+		g.fillRect(0, 0, MainFrame.WIDTH, MainFrame.HEIGHT);
+		
 		Bird bird = world.getBird();
 		
 		bird.paint(g);
@@ -35,6 +41,12 @@ public class GameCanvas extends Canvas {
 		for(Tube tube : tubes) {
 			tube.paint(g);
 		}
+		
+		g.setColor(Color.orange);
+		g.fillRect(0, 0, MainFrame.WIDTH, UP_BOUND);
+		
+		g.setColor(Color.black);
+		g.fillRect(0, MainFrame.HEIGHT - DOWN_BOUND, MainFrame.WIDTH, DOWN_BOUND);
 	}
 
 }

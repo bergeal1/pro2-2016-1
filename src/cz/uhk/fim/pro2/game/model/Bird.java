@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import cz.uhk.fim.pro2.game.gui.GameCanvas;
 import cz.uhk.fim.pro2.game.gui.MainFrame;
 
 public class Bird {
@@ -72,17 +73,10 @@ public class Bird {
 	public boolean isOutOf(){
 		Rectangle rectangle = getRectangle();
 		
-		// Porovnani min hodnot
-		if(rectangle.getMinX() < 0 || rectangle.getMinY() < 0){
-			return true;
-		}
+		int upLimit = GameCanvas.UP_BOUND;
+		int downLimit = MainFrame.HEIGHT - GameCanvas.DOWN_BOUND;
 		
-		// Porovnani max hodnot
-		if(rectangle.getMaxX() > MainFrame.WIDTH || rectangle.getMaxY() > MainFrame.HEIGHT){
-			return true;
-		}
-		
-		return false;
+		return rectangle.getMinY() < upLimit || rectangle.getMaxY() > downLimit;
 	}
 	
 	public void goUp() {
