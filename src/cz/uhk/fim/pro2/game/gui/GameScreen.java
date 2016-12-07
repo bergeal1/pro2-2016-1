@@ -96,7 +96,7 @@ public class GameScreen extends Screen implements WorldListener {
 		
 		add(gameCanvas);
 		
-		timer = new Timer(20, new ActionListener() {
+		timer = new Timer(15, new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -110,6 +110,8 @@ public class GameScreen extends Screen implements WorldListener {
 				
 				if(!bird.isAlive()){
 					timer.stop();
+					FinishScreen finisScreen = new FinishScreen(mainFrame,world);
+					mainFrame.setScreen(finisScreen);
 				}
 				
 				gameCanvas.repaint();
