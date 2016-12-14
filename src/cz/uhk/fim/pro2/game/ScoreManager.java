@@ -1,24 +1,63 @@
 package cz.uhk.fim.pro2.game;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.xml.bind.SchemaOutputResolver;
 
 public class ScoreManager {
 
-	// DEFINICE TRIDY 	
-	private List<Integer> scoreList;
+	// DEFINICE TRIDY
 	
 	private ScoreManager() {
-		this.scoreList = new ArrayList<>();
 	}
 	
 	public void addScore(int score) {
+
+		List<Integer> scoreList = getAll();
 		scoreList.add(score);
+
+		try {
+			FileWriter fileWriter = new FileWriter(Game.SCORE_FILE);
+
+			for (int scoreItem : scoreList) {
+				fileWriter.append(String.valueOf(scoreItem));
+				fileWriter.append(";");
+				fileWriter.append("Hey");
+				fileWriter.append("\n");
+			}
+
+			fileWriter.flush();
+			fileWriter.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Integer> getAll() {
+
+		List<Integer> scoreList = new ArrayList<>();
+
+		try {
+
+			FileReader fileReader = new FileReader(Game.SCORE_FILE);
+
+			BufferedReader reader = new BufferedReader(fileReader);
+
+			String line;
+			while ((line = reader.readLine()) != null) {
+                String[] score = line.split(";");
+                scoreList.add(Integer.valueOf(score[0]));
+            }
+
+		} catch (Exception e) {
+
+		}
+
 		return scoreList;
 	}
 
