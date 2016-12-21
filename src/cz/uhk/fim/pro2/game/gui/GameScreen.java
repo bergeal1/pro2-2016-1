@@ -62,10 +62,16 @@ public class GameScreen extends Screen implements WorldListener {
 		
 		jLabelLives = new JLabel("Lives: " + Bird.DEFAULT_LIVES);
 		jLabelScore = new JLabel("Score: " + Bird.DEFAULT_SCORE);
+
+		jLabelLives.setFont(new Font("Arial", Font.BOLD, 30));
+		jLabelLives.setForeground(Color.WHITE);
+		
+		jLabelScore.setFont(new Font("Arial", Font.BOLD, 30));
+		jLabelScore.setForeground(Color.WHITE);
 		
 		jLabelLives.setBounds(260, 20, 120, 60);
 		jLabelScore.setBounds(100, 20, 120, 60);
-		
+
 		add(jLabelLives);
 		add(jLabelScore);	
 		
@@ -113,8 +119,8 @@ public class GameScreen extends Screen implements WorldListener {
 					FinishScreen finisScreen = new FinishScreen(mainFrame,world);
 					mainFrame.setScreen(finisScreen);
 				}
-				
-				gameCanvas.repaint();
+
+				repaint();
 				
 				lastTimeMillis = currentTimeMillis;
 			}

@@ -9,13 +9,14 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 
 import cz.uhk.fim.pro2.game.model.Bird;
 import cz.uhk.fim.pro2.game.model.Heart;
 import cz.uhk.fim.pro2.game.model.Tube;
 import cz.uhk.fim.pro2.game.model.World;
 
-public class GameCanvas extends Canvas {
+public class GameCanvas extends JPanel {
 	
 	public static int UP_BOUND = 100;
 	public static int DOWN_BOUND = 200;
@@ -25,6 +26,8 @@ public class GameCanvas extends Canvas {
 	private BufferedImage imageBird, imageBackground, imageBottom, imageHeart, imageTop, imageTube;
 	
 	public GameCanvas(World world) {
+		super();
+		
 		this.world = world;
 		
 		try {
